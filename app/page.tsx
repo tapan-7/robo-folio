@@ -165,12 +165,13 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="relative w-full h-full max-h-[800px] flex items-center justify-center"
+            className="relative w-full h-full min-h-[400px] max-h-[800px] flex items-center justify-center"
           >
             <Image
               src="/images/hero.png"
               alt="Robot World"
               fill
+              sizes="(max-width: 768px) 100vw, 60vw"
               className="object-contain drop-shadow-2xl"
               priority
             />
@@ -236,34 +237,50 @@ export default function Home() {
       </section>
 
       {/* Lower Preview Cards */}
-      <section className="px-10 md:px-24 py-20 bg-background relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      <section className="px-6 md:px-10 lg:px-24 py-20 bg-background relative z-10 w-full overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 max-w-[1800px] mx-auto">
           {[
             {
               id: "01",
               title: "About Me",
-              desc: "My journey as a creative developer.",
+              desc: "Hi, I'm Tapan. A passionate developer who loves building things for the web.",
+              image: "/images/about_me.png",
+              button: "Know more",
             },
             {
               id: "02",
               title: "Skills",
-              desc: "Technologies and tools I use.",
+              desc: "",
+              image: "/images/skill.png",
+              button: "",
             },
             {
               id: "03",
               title: "Projects",
-              desc: "A selection of my recent work.",
+              desc: "",
+              image: "/images/project.png",
+              button: "Explore",
             },
-            { id: "04", title: "Resume", desc: "My professional experience." },
+            {
+              id: "04",
+              title: "Resume",
+              desc: "My Resume. Download or view my resume in one click.",
+              image: "/images/resume.png",
+              button: "Download",
+            },
             {
               id: "05",
               title: "Blog",
-              desc: "Thoughts on software and design.",
+              desc: "Latest Articles. Thoughts, tutorials and things I learn.",
+              image: "/images/blog.png",
+              button: "Read Blog",
             },
             {
               id: "06",
               title: "Contact",
-              desc: "Let's build something together.",
+              desc: "Let's build something amazing together.",
+              image: "/images/contact.png",
+              button: "Get in Touch",
             },
           ].map((card, index) => (
             <motion.div
@@ -272,43 +289,69 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-card border border-border rounded-[32px] p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group cursor-pointer"
+              className="bg-card border border-border rounded-[24px] p-5 shadow-sm hover:shadow-xl transition-all duration-300 group cursor-pointer relative overflow-hidden flex flex-col min-h-[300px] xl:min-h-[340px]"
             >
-              <div className="flex justify-between items-start mb-12">
-                <span className="text-muted-foreground font-mono text-sm">
-                  {card.id}
-                </span>
-                <div className="w-12 h-12 rounded-full bg-background flex items-center justify-center border border-border group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  <ArrowRight className="w-5 h-5" />
+              <div className="relative z-10 flex flex-col h-full pointer-events-none">
+                <div>
+                  <span className="text-foreground font-bold text-sm mb-1 block">
+                    {card.id}
+                  </span>
+                  <h3 className="text-xl font-bold mb-3">{card.title}</h3>
+                  {card.desc && (
+                    <p className="text-xs text-muted-foreground leading-relaxed max-w-[70%]">
+                      {card.desc}
+                    </p>
+                  )}
                 </div>
+                
+                {card.button && (
+                  <div className="mt-auto pointer-events-auto">
+                    <button className="text-xs font-semibold bg-secondary/80 text-secondary-foreground border border-border px-4 py-2 rounded-full hover:bg-secondary transition-colors">
+                      {card.button}
+                    </button>
+                  </div>
+                )}
               </div>
-              <h3 className="text-2xl font-bold mb-3">{card.title}</h3>
-              <p className="text-muted-foreground">{card.desc}</p>
+              
+              <div className="absolute right-[-10px] bottom-0 w-[140px] h-[140px] xl:w-[170px] xl:h-[170px] pointer-events-none">
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  sizes="(max-width: 1280px) 140px, 170px"
+                  className="object-contain object-bottom drop-shadow-lg transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* Feature Bar */}
-      <section className="px-10 md:px-24 pb-32">
+      <section className="px-6 md:px-10 lg:px-24 pb-32">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="max-w-7xl mx-auto bg-card border border-border rounded-[32px] p-10 shadow-sm"
+          className="max-w-[1800px] mx-auto bg-card border border-border rounded-[32px] p-8 shadow-sm overflow-hidden"
         >
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8">
             {[
-              "Interactive Robots",
-              "Cursor Follower",
-              "Obstacle Aware",
-              "Scroll Journey",
-              "Light & Playful",
-              "Fully Responsive",
+              { title: "Interactive Robots", desc: "Each robot has its own personality." },
+              { title: "Cursor Follower", desc: "Curio follows your cursor smartly." },
+              { title: "Obstacle Aware", desc: "They avoid content like a real world." },
+              { title: "Scroll Journey", desc: "Explore sections in a smooth experience." },
+              { title: "Light & Playful", desc: "A fun and lively portfolio experience." },
+              { title: "Fully Responsive", desc: "Perfect on all devices mobile, tablet, desktop." },
             ].map((feature, i) => (
-              <div key={i} className="flex flex-col items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center mb-2" />
-                <h4 className="font-bold text-sm">{feature}</h4>
+              <div key={i} className="flex items-start gap-4">
+                <div className="w-10 h-10 shrink-0 rounded-xl bg-background border border-border flex items-center justify-center">
+                  <div className="w-5 h-5 bg-foreground/20 rounded-sm"></div>
+                </div>
+                <div>
+                  <h4 className="font-bold text-sm mb-1">{feature.title}</h4>
+                  <p className="text-xs text-muted-foreground leading-tight">{feature.desc}</p>
+                </div>
               </div>
             ))}
           </div>
