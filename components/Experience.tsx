@@ -3,6 +3,8 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
 
+import { portfolioData } from "@/data/portfolio";
+
 export default function Experience() {
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -17,26 +19,7 @@ export default function Experience() {
     restDelta: 0.001
   });
 
-  const experiences = [
-    {
-      year: "2025",
-      role: "Software Development Engineer - I",
-      company: "HyScaler Nettantra Technologies",
-      desc: "Architecting enterprise legal-tech platforms with AI-assisted workflows. Driving frontend modules with Next.js and React Native, and resolving complex system integrations."
-    },
-    {
-      year: "2024",
-      role: "Junior Technical Programmer",
-      company: "HyScaler Nettantra Technologies",
-      desc: "Built cross-platform healthcare applications. Integrated third-party Video SDKs for consultations and developed real-time engagement workflows."
-    },
-    {
-      year: "2023",
-      role: "Software Developer Trainee",
-      company: "HyScaler Nettantra Technologies",
-      desc: "Developed full-stack MERN applications, designed reusable UI components, and integrated REST APIs into workflows."
-    }
-  ];
+  const experiences = portfolioData.experience;
 
   return (
     <section ref={containerRef} className="w-full max-w-[1600px] mx-auto px-6 md:px-10 lg:px-24 py-32 relative overflow-hidden">
@@ -71,12 +54,17 @@ export default function Experience() {
                     transition={{ duration: 0.6 }}
                     className="bg-card border border-border p-8 rounded-[32px] shadow-sm hover:shadow-xl transition-all duration-300 group"
                   >
-                    <span className="text-4xl font-extrabold text-foreground/10 group-hover:text-foreground/20 transition-colors absolute top-4 right-8 md:right-auto md:left-8 pointer-events-none">
-                      {exp.year}
+                    <span className="text-4xl font-extrabold text-foreground/10 group-hover:text-foreground/20 transition-colors absolute top-4 right-8 md:right-auto md:left-8 pointer-events-none whitespace-nowrap">
+                      {exp.period.split(" ")[0]} {exp.period.split(" ")[exp.period.split(" ").length - 1]}
                     </span>
-                    <h3 className="text-xl font-bold mb-2 relative z-10">{exp.role}</h3>
+                    <h3 className="text-xl font-bold mb-2 relative z-10">{exp.title}</h3>
                     <span className="text-sm font-bold text-foreground bg-foreground/10 px-3 py-1 rounded-full mb-4 inline-block relative z-10">{exp.company}</span>
-                    <p className="text-muted-foreground leading-relaxed relative z-10">{exp.desc}</p>
+                    <p className="text-muted-foreground leading-relaxed relative z-10 mb-4">{exp.description}</p>
+                    <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-2 relative z-10">
+                      {exp.achievements.map((achievement, aIdx) => (
+                        <li key={aIdx}>{achievement}</li>
+                      ))}
+                    </ul>
                   </motion.div>
                 </div>
 

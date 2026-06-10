@@ -4,42 +4,10 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { FaArrowUpRightFromSquare, FaGithub } from "react-icons/fa6";
 
+import { portfolioData } from "@/data/portfolio";
+
 export default function Projects() {
-  const projects = [
-    {
-      title: "Task Management System",
-      tagline: "Collaborative task management with real-time updates.",
-      description: "An enterprise-grade collaborative task management application featuring real-time state synchronization, drag-and-drop board interfaces, and extensive team collaboration tooling.",
-      problem: "Teams needed a highly responsive, zero-latency tool to manage complex workflows without refreshing.",
-      solution: "Implemented WebSocket-based state syncing across clients with optimistic UI updates.",
-      tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Socket.io"],
-      github: "#",
-      live: "#",
-      image: "https://placehold.co/1200x800/111111/525252.png?text=Task+Management",
-    },
-    {
-      title: "Analytics Dashboard",
-      tagline: "Interactive data visualization and automated reporting.",
-      description: "A comprehensive analytics dashboard delivering real-time metrics, interactive data visualization, and automated reporting capabilities for enterprise clients.",
-      problem: "Aggregating millions of data points into a readable format in under 2 seconds.",
-      solution: "Utilized Redis caching layers alongside optimized SQL queries and lightweight Chart.js rendering.",
-      tech: ["React", "Chart.js", "Express.js", "MySQL", "Redis"],
-      github: "#",
-      live: "#",
-      image: "https://placehold.co/1200x800/111111/525252.png?text=Analytics+Dashboard",
-    },
-    {
-      title: "API Gateway Service",
-      tagline: "Microservices gateway with rate limiting and auth.",
-      description: "A highly scalable microservices API gateway responsible for secure request routing, distributed rate limiting, and centralized authentication.",
-      problem: "Protecting backend microservices from traffic spikes and malicious requests.",
-      solution: "Built a distributed rate limiter using Redis and implemented scalable Docker containers.",
-      tech: ["Node.js", "Express", "Docker", "AWS", "Redis"],
-      github: "#",
-      live: "#",
-      image: "https://placehold.co/1200x800/111111/525252.png?text=API+Gateway",
-    }
-  ];
+  const projects = portfolioData.projects;
 
   return (
     <section id="projects" className="w-full bg-background relative overflow-hidden py-32">
@@ -94,16 +62,8 @@ export default function Projects() {
                     className="w-full lg:w-1/2 flex flex-col"
                   >
                     <h3 className="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">{project.title}</h3>
-                    <p className="text-xl text-muted-foreground mb-8 font-medium">{project.tagline}</p>
-                    
                     <div className="space-y-6 mb-10 text-muted-foreground leading-relaxed">
                       <p>{project.description}</p>
-                      <div className="bg-card/50 border border-border p-6 rounded-2xl">
-                        <strong className="text-foreground block mb-2">Problem:</strong>
-                        <p className="mb-4">{project.problem}</p>
-                        <strong className="text-foreground block mb-2">Solution:</strong>
-                        <p>{project.solution}</p>
-                      </div>
                     </div>
 
                     <div className="flex flex-wrap gap-2 mb-10">

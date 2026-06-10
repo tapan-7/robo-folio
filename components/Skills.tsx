@@ -3,25 +3,12 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+import { portfolioData } from "@/data/portfolio";
 export default function Skills() {
-  const skillCategories = [
-    {
-      title: "Frontend",
-      skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "ShadCN UI", "Framer Motion"],
-    },
-    {
-      title: "Backend",
-      skills: ["Node.js", "NestJS", "Express", "MongoDB", "PostgreSQL", "Redis"],
-    },
-    {
-      title: "Mobile",
-      skills: ["React Native", "Expo"],
-    },
-    {
-      title: "Cloud & Tools",
-      skills: ["Docker", "AWS", "Git", "GitHub Actions", "Linux"],
-    },
-  ];
+  const skillCategories = Object.entries(portfolioData.skills).map(([title, skills]) => ({
+    title,
+    skills,
+  }));
 
   return (
     <section id="skills" className="w-full max-w-[1600px] mx-auto px-6 md:px-10 lg:px-24 py-24 relative overflow-hidden">

@@ -6,10 +6,12 @@ import {
   FaArrowRight,
   FaDownload,
   FaEnvelope,
-  FaMessage,
-  FaCode,
-  FaUserTie,
+  FaGithub,
+  FaLinkedin,
+  FaXTwitter,
 } from "react-icons/fa6";
+
+import { portfolioData } from "@/data/portfolio";
 
 export default function Hero() {
   return (
@@ -55,14 +57,13 @@ export default function Hero() {
             </span>
 
             <h1 className="text-6xl md:text-[90px] leading-[0.95] font-extrabold tracking-tight mb-8">
-              Tapan Kumar
+              {portfolioData.profile.name.split(" ").slice(0, 2).join(" ")}
               <br />
-              <span className="hand-drawn-underline">Swain</span>
+              <span className="hand-drawn-underline">{portfolioData.profile.name.split(" ").slice(2).join(" ")}</span>
             </h1>
 
             <p className="text-xl text-muted-foreground max-w-[500px] mb-10 leading-relaxed">
-              I build scalable web applications, intuitive user experiences and
-              delightful digital products.
+              {portfolioData.profile.summary}
             </p>
 
             <div className="flex flex-wrap gap-4 mb-12">
@@ -75,16 +76,16 @@ export default function Hero() {
             </div>
 
             <div className="flex items-center gap-6 text-muted-foreground">
-              <a href="#" className="hover:text-foreground transition-colors">
-                <FaMessage className="w-6 h-6" />
+              <a href={portfolioData.profile.github} target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
+                <FaGithub className="w-6 h-6" />
               </a>
-              <a href="#" className="hover:text-foreground transition-colors">
-                <FaUserTie className="w-6 h-6" />
+              <a href={portfolioData.profile.linkedin} target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
+                <FaLinkedin className="w-6 h-6" />
               </a>
-              <a href="#" className="hover:text-foreground transition-colors">
-                <FaCode className="w-6 h-6" />
+              <a href={portfolioData.profile.twitter} target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
+                <FaXTwitter className="w-6 h-6" />
               </a>
-              <a href="#" className="hover:text-foreground transition-colors">
+              <a href={`mailto:${portfolioData.profile.email}`} className="hover:text-foreground transition-colors">
                 <FaEnvelope className="w-6 h-6" />
               </a>
             </div>

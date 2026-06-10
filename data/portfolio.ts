@@ -1,0 +1,130 @@
+export const portfolioData = {
+  profile: {
+    name: "Tapan Kumar Swain",
+    title: "Software Development Engineer",
+    email: "tapankumarswain353@gmail.com",
+    mobile: "+91-8144639448",
+    website: "https://example.com",
+    github: "https://github.com/tapan-7",
+    linkedin: "https://linkedin.com/in/tapankumarswain", // Assuming standard format
+    twitter: "https://twitter.com/tapankumarswain",
+    summary:
+      "Software Development Engineer with 3 years of experience building web and mobile applications using React, React Native, Next.js, and TypeScript. Experienced in enterprise product development involving AI-assisted workflows, third-party integrations, real-time systems, and cloud-based architectures.",
+  },
+  experience: [
+    {
+      title: "Software Development Engineer - I",
+      company: "HyScaler Nettantra Technologies Pvt. Ltd.",
+      period: "Jan 2026 – Present",
+      location: "Bhubaneswar",
+      description:
+        "Contributed to the development of an enterprise legal-tech platform used for drafting, reviewing, and managing financial services contracts through AI-assisted workflows.",
+      achievements: [
+        "Frontend Development: Developed responsive modules using Next.js, React, and TypeScript for contract workflows, knowledge base management, and real-time monitoring dashboards.",
+        "Salesforce Integration: Implemented Salesforce integrations to synchronize deal and contract-related information into internal systems.",
+        "Google Drive Integration: Built document synchronization workflows to fetch, process, and manage files from Google Drive within the organizational knowledge base.",
+        "Scheduled Processing: Implemented Cron-based incremental synchronization jobs to automate enterprise data ingestion and reduce manual operations.",
+        "Real-Time Synchronization: Collaborated on WebSocket-based progress tracking and status synchronization for asynchronous document-processing workflows.",
+        "System Stability: Resolved UI issues, synchronization edge cases, and race conditions, improving platform reliability and user experience.",
+      ],
+    },
+    {
+      title: "Junior Technical Programmer",
+      company: "HyScaler Nettantra Technologies Pvt. Ltd.",
+      period: "Jan 2024 – Dec 2024",
+      location: "Bhubaneswar",
+      description:
+        "Developed cross-platform healthcare applications supporting doctor consultations, appointment booking, and patient engagement workflows.",
+      achievements: [
+        "React Native Development: Built responsive Android and iOS applications using React Native and TypeScript.",
+        "Video Consultation: Integrated third-party Video SDKs for secure doctor-patient communication.",
+        "Notifications: Implemented Firebase push notifications and real-time engagement features.",
+        "API Integration: Integrated mobile applications with backend services and REST APIs for secure and reliable communication.",
+      ],
+    },
+    {
+      title: "Software Developer Trainee",
+      company: "HyScaler Nettantra Technologies Pvt. Ltd.",
+      period: "Jun 2023 – Dec 2023",
+      location: "Bhubaneswar",
+      description:
+        "Completed hands-on training in full-stack web development with a focus on the MERN stack and modern development workflows.",
+      achievements: [
+        "MERN Application Development: Developed and maintained application modules using MongoDB, Express.js, React, and Node.js.",
+        "Responsive UI Development: Designed reusable UI components and responsive user interfaces.",
+        "CRUD Operations: Implemented database operations and integrated REST APIs into application workflows.",
+        "Version Control: Worked with Git-based development workflows and collaborative coding practices.",
+      ],
+    },
+  ],
+  education: [
+    {
+      degree: "Master of Computer Applications (MCA)",
+      institution: "College of IT & Management",
+      period: "2020 – 2022",
+      description: "Bhubaneswar",
+      gpa: "",
+    },
+    {
+      degree: "Bachelor of Science (ITM)",
+      institution: "Bhadrak Autonomous College",
+      period: "2017 – 2020",
+      description: "Bhadrak",
+      gpa: "",
+    },
+    {
+      degree: "Higher Secondary (+2 Science)",
+      institution: "Indigo College of Science & Commerce",
+      period: "2014 – 2016",
+      description: "Bhadrak",
+      gpa: "",
+    },
+  ],
+  skills: {
+    "Frontend": ["React.js", "Next.js", "React Native", "TypeScript", "JavaScript"],
+    "Backend": ["NestJS", "Node.js", "REST APIs", "WebSockets"],
+    "Database": ["PostgreSQL", "Prisma ORM"],
+    "Cloud & DevOps": ["Docker", "AWS S3", "Vercel", "GitHub"],
+    "Messaging": ["Redis", "BullMQ"],
+    "Integrations": ["Salesforce API", "Google Drive API"],
+    "Tools": ["Git", "Postman", "VS Code"],
+  },
+  projects: [
+    {
+      title: "E-Commerce Platform",
+      description:
+        "Full-stack e-commerce solution with React, Node.js, and MongoDB. Features include user authentication, payment integration, and admin dashboard.",
+      tech: ["React", "Node.js", "MongoDB", "Stripe", "JWT"],
+      github: "#",
+      live: "#",
+      image: "https://placehold.co/1200x800/111111/525252.png?text=E-Commerce",
+    },
+    {
+      title: "Task Management System",
+      description:
+        "Collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
+      tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Socket.io"],
+      github: "#",
+      live: "#",
+      image: "https://placehold.co/1200x800/111111/525252.png?text=Task+Management",
+    },
+    {
+      title: "Analytics Dashboard",
+      description:
+        "Interactive analytics dashboard with data visualization, real-time metrics, and automated reporting capabilities.",
+      tech: ["React", "Chart.js", "Express.js", "MySQL", "Redis"],
+      github: "#",
+      live: "#",
+      image: "https://placehold.co/1200x800/111111/525252.png?text=Analytics",
+    },
+    {
+      title: "API Gateway Service",
+      description:
+        "Microservices API gateway with rate limiting, authentication, and request routing for scalable applications.",
+      tech: ["Node.js", "Express", "Docker", "AWS", "Redis"],
+      github: "#",
+      live: "#",
+      image: "https://placehold.co/1200x800/111111/525252.png?text=API+Gateway",
+    },
+  ],
+};

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { FaGithub, FaLinkedin, FaXTwitter, FaEnvelope } from "react-icons/fa6";
+import { portfolioData } from "@/data/portfolio";
 
 export default function Contact() {
   const robots = [
@@ -44,25 +45,31 @@ export default function Contact() {
 
         <div className="flex items-center justify-center gap-8 mb-24">
           <a
-            href="#"
+            href={portfolioData.profile.github}
+            target="_blank"
+            rel="noreferrer"
             className="p-4 bg-card border border-border rounded-full hover:bg-foreground hover:text-background transition-colors shadow-sm"
           >
             <FaGithub className="w-6 h-6" />
           </a>
           <a
-            href="#"
+            href={portfolioData.profile.linkedin}
+            target="_blank"
+            rel="noreferrer"
             className="p-4 bg-card border border-border rounded-full hover:bg-foreground hover:text-background transition-colors shadow-sm"
           >
             <FaLinkedin className="w-6 h-6" />
           </a>
           <a
-            href="#"
+            href={`mailto:${portfolioData.profile.email}`}
             className="p-4 bg-card border border-border rounded-full hover:bg-foreground hover:text-background transition-colors shadow-sm"
           >
             <FaEnvelope className="w-6 h-6" />
           </a>
           <a
-            href="#"
+            href={portfolioData.profile.twitter}
+            target="_blank"
+            rel="noreferrer"
             className="p-4 bg-card border border-border rounded-full hover:bg-foreground hover:text-background transition-colors shadow-sm"
           >
             <FaXTwitter className="w-6 h-6" />
