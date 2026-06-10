@@ -1,33 +1,103 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import { portfolioData } from "@/data/portfolio";
 
+// --- Typewriter Effect Component ---
+const typewriterVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.03,
+    },
+  },
+};
+
+const letterVariants: Variants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0 },
+};
+
+function TypewriterText({ text, className = "" }: { text: string, className?: string }) {
+  return (
+    <motion.span variants={typewriterVariants} initial="hidden" whileInView="visible" className={className}>
+      {text.split('').map((char, index) => (
+        <motion.span key={index} variants={letterVariants} className="inline-block whitespace-pre">
+          {char === ' ' ? '\u00A0' : char}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+}
+
 export default function Experience() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // 300vh for a comfortable scroll time
+  const journey = [...portfolioData.experience].reverse(); // Oldest first
+
+  // --- Dynamic Road Calculation ---
+  const spacing = 80; // 80vw between items
+  const startX = 20;  // Start node at 20vw
+
+  const nodes: any[] = [];
+
+  let currentX = startX + spacing; 
+  let currentY = 600;
+
+  journey.forEach((exp, idx) => {
+    nodes.push({ type: 'exp', xPos: currentX, yPos: currentY, data: exp, idx });
+    currentX += spacing;
+    currentY = currentY === 600 ? 200 : 600; // alternate bottom/top
+  });
+
+  const totalWidthVw = currentX + 60; // extra padding at the end
+
+  // Generate SVG Path
+  let d = `M -100 400 L 400 400 `; // Start line
+
+  // To first exp
+  d += `C 700 400, 700 ${nodes[0].yPos}, ${nodes[0].xPos * 10} ${nodes[0].yPos} `;
+
+  // Between experiences
+  for (let i = 0; i < journey.length - 1; i++) {
+    const x1 = nodes[i].xPos * 10;
+    const y1 = nodes[i].yPos; 
+    const x2 = nodes[i+1].xPos * 10;
+    const y2 = nodes[i+1].yPos;
+    
+    const midX = (x1 + x2) / 2;
+    d += `C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2} `;
+  }
+
+  // To end line
+  const lastExpX = nodes[journey.length - 1].xPos * 10;
+  const lastExpY = nodes[journey.length - 1].yPos;
+  const endNodeX = currentX * 10;
+  d += `C ${(lastExpX + endNodeX)/2} ${lastExpY}, ${(lastExpX + endNodeX)/2} 400, ${endNodeX} 400 `;
+
+  // Finish line
+  d += `L ${(currentX + 100) * 10} 400`;
+
+  // --- Scroll Logic ---
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // Track is 200vw wide. Translate by -50% to shift by exactly -100vw, leaving the last 100vw on screen
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
-
-  // Reverse so we scroll from oldest to newest
-  const journey = [...portfolioData.experience].reverse();
+  const maxTranslateX = `-${totalWidthVw - 100}vw`;
+  const x = useTransform(scrollYProgress, [0, 1], ["0vw", maxTranslateX]);
 
   return (
-    <section id="experience" className="w-full relative bg-background pt-32">
+    <section id="experience" className="w-full relative bg-[#F5F5F3] dark:bg-background pt-32 transition-colors duration-300">
       
       <div className="w-full text-center px-6 mb-12">
         <span className="text-sm font-bold tracking-widest text-muted-foreground uppercase mb-4 block">
           The Journey
         </span>
-        <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+        <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-foreground">
           Road to Present
         </h2>
         <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
@@ -36,51 +106,35 @@ export default function Experience() {
       </div>
 
       {/* Horizontal Scroll Section */}
-      <div ref={containerRef} className="h-[300vh] relative w-full">
-        <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center bg-background">
+      <div ref={containerRef} style={{ height: `${totalWidthVw}vh` }} className="relative w-full">
+        <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center bg-[#F5F5F3] dark:bg-background transition-colors duration-300">
           
           <motion.div 
-            style={{ x }} 
-            className="relative h-full flex items-center w-[200vw]"
+            style={{ x, width: `${totalWidthVw}vw` }} 
+            className="relative h-[800px] flex items-center shrink-0"
           >
             {/* Infographic Winding Road SVG */}
-            <div className="absolute left-0 h-[600px] w-[200vw] pointer-events-none flex items-center overflow-hidden">
+            <div className="absolute left-0 h-[800px] w-full pointer-events-none flex items-center overflow-hidden">
               <svg 
                 width="100%" 
                 height="100%" 
-                viewBox="0 0 2000 600" 
+                viewBox={`0 0 ${totalWidthVw * 10} 800`} 
                 preserveAspectRatio="none" 
               >
-                {/* 
-                  Steep winding road. 
-                  1vw = 10 units. 
-                  Item 0 at 30vw (300)
-                  Item 1 at 80vw (800)
-                  Item 2 at 130vw (1300)
-                */}
+                {/* Thick road surface */}
                 <path 
-                  d="M -100 300 
-                     C 100 300, 150 100, 300 100 
-                     C 450 100, 650 500, 800 500 
-                     C 950 500, 1150 100, 1300 100 
-                     C 1450 100, 1650 500, 1800 500 
-                     C 1950 500, 2050 300, 2200 300" 
-                  stroke="currentColor" 
-                  className="text-foreground opacity-20"
-                  strokeWidth="120" 
+                  d={d}
+                  className="stroke-[#222222] dark:stroke-white/10 transition-colors duration-300"
+                  strokeWidth="100" 
                   fill="none" 
                   strokeLinecap="round" 
+                  style={{ filter: 'drop-shadow(0px 20px 30px rgba(0,0,0,0.15))' }}
                 />
+                {/* White dashed centerline */}
                 <path 
-                  d="M -100 300 
-                     C 100 300, 150 100, 300 100 
-                     C 450 100, 650 500, 800 500 
-                     C 950 500, 1150 100, 1300 100 
-                     C 1450 100, 1650 500, 1800 500 
-                     C 1950 500, 2050 300, 2200 300" 
-                  stroke="currentColor" 
-                  className="text-background"
-                  strokeWidth="8" 
+                  d={d}
+                  className="stroke-white dark:stroke-white/50 transition-colors duration-300"
+                  strokeWidth="6" 
                   strokeDasharray="30 40" 
                   fill="none" 
                   strokeLinecap="round" 
@@ -88,15 +142,54 @@ export default function Experience() {
               </svg>
             </div>
 
-            {/* Experience Items */}
-            {journey.map((exp, idx) => (
-              <ExperienceItem 
-                key={idx} 
-                exp={exp} 
-                idx={idx} 
-                total={journey.length} 
-              />
-            ))}
+            {/* Nodes and Cards */}
+            {nodes.map((node, i) => {
+              const isAbove = node.yPos > 400; // If road is at 600, card goes ABOVE the road
+              const cardOffset = 100; // 100px gap between road and card
+
+              return (
+                <div 
+                  key={i}
+                  className="absolute z-20 flex flex-col items-center"
+                  style={{ 
+                    left: `${node.xPos}vw`,
+                    transform: 'translateX(-50%)',
+                    top: !isAbove ? `${node.yPos + cardOffset}px` : 'auto',
+                    bottom: isAbove ? `${800 - node.yPos + cardOffset}px` : 'auto'
+                  }}
+                >
+                  {/* Card Content */}
+                  <ExperienceCard data={node.data} />
+
+                  {/* Heavy Connector Line */}
+                  <div 
+                    className={`absolute z-10 left-1/2 -translate-x-1/2`} 
+                    style={{ height: `${cardOffset}px`, [isAbove ? 'bottom' : 'top']: `-${cardOffset}px` }}
+                  >
+                    <motion.div 
+                      initial={{ scaleY: 0, opacity: 0 }}
+                      whileInView={{ scaleY: 1, opacity: 1 }}
+                      transition={{ duration: 0.5, ease: "easeOut" }}
+                      style={{ originY: isAbove ? 1 : 0 }} 
+                      className="w-[4px] md:w-[6px] h-full rounded-full bg-foreground/30 dark:bg-foreground/50"
+                    />
+                  </div>
+
+                  {/* Road Dot */}
+                  <div 
+                    className={`absolute z-20 left-1/2`} 
+                    style={{ [isAbove ? 'bottom' : 'top']: `-${cardOffset}px`, transform: `translateY(${isAbove ? '50%' : '-50%'}) translateX(-50%)` }}
+                  >
+                     <motion.div 
+                       initial={{ scale: 0 }}
+                       whileInView={{ scale: 1 }}
+                       transition={{ duration: 0.4, delay: 0.1 }}
+                       className="w-6 h-6 rounded-full bg-[#222222] dark:bg-white border-4 border-white dark:border-zinc-900 shadow-lg"
+                     />
+                  </div>
+                </div>
+              );
+            })}
           </motion.div>
         </div>
       </div>
@@ -104,65 +197,54 @@ export default function Experience() {
   );
 }
 
-// Sub-component for individual timeline items
-function ExperienceItem({ exp, idx, total }: { exp: any, idx: number, total: number }) {
-  const isAbove = idx % 2 !== 0; // Odd index = Trough (Text high)
-  
-  // Place items at 30vw, 80vw, 130vw...
-  const leftPosition = 30 + (idx * 50);
+// --- Card Components ---
 
+function ExperienceCard({ data }: { data: any }) {
   return (
-    <div 
-      className="absolute flex flex-col z-20"
-      style={{ 
-        left: `${leftPosition}vw`,
-        top: isAbove ? '10%' : 'auto',
-        bottom: isAbove ? 'auto' : '10%',
-        width: '45vw',
-        maxWidth: '450px',
-        transform: 'translateX(-50%)'
-      }}
+    <motion.div 
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ margin: "0px -100px" }}
+      transition={{ duration: 0.6 }}
+      className="w-[320px] md:w-[400px] text-left transition-colors duration-300"
     >
-      {/* Stick connecting to road */}
-      <div 
-        className={`absolute left-1/2 -translate-x-1/2 w-1 bg-border/50 shadow-[0_0_15px_currentColor] 
-          ${isAbove ? '-bottom-[25vh] h-[25vh]' : '-top-[25vh] h-[25vh]'}
-        `} 
-      />
-
-      {/* Milestone Node */}
-      <div 
-        className={`absolute left-1/2 -translate-x-1/2 w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#e6d5c3] dark:bg-[#3a3028] flex items-center justify-center border-[6px] border-background shadow-xl z-30 text-2xl md:text-3xl
-          ${isAbove ? '-bottom-[25vh] translate-y-1/2' : '-top-[25vh] -translate-y-1/2'}
-        `} 
+      <div className="text-sm font-bold text-muted-foreground mb-1 uppercase tracking-widest">
+        <TypewriterText text={data.period} />
+      </div>
+      <h3 className="text-2xl md:text-3xl font-black mb-1 text-foreground leading-tight">
+        <TypewriterText text={data.title} />
+      </h3>
+      <div className="text-primary font-bold text-lg mb-4">
+        <TypewriterText text={data.company} />
+      </div>
+      <motion.p 
+        initial={{ opacity: 0 }} 
+        whileInView={{ opacity: 1 }} 
+        viewport={{ margin: "0px -100px" }}
+        transition={{ delay: 0.4, duration: 0.5 }}
+        className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6 font-medium"
       >
-        {['💼', '🔊', '👍', '🎨', '🔄'][idx % 5]}
-      </div>
-
-      {/* Typography Content */}
-      <div className="flex flex-col items-center text-center px-4 bg-background/50 backdrop-blur-sm rounded-2xl py-4 border border-foreground/5">
-        <h3 className="text-xl md:text-2xl font-bold mb-2 text-foreground">
-          {exp.title}
-        </h3>
-        <span className="text-xs font-bold text-primary mb-3">
-          {exp.period}
-        </span>
-        <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-          {exp.description}
-        </p>
-      </div>
-
-      {/* Robot Decoration */}
-      {idx === 0 && (
-         <div className={`absolute -right-24 ${isAbove ? '-top-10' : '-bottom-10'} w-32 h-32 pointer-events-none hidden lg:block opacity-60`}>
-            <Image src="/images/curio_explorer.png" alt="Curio" fill sizes="128px" className="object-contain" />
-         </div>
-      )}
-      {idx === total - 1 && (
-         <div className={`absolute -left-24 ${isAbove ? '-top-10' : '-bottom-10'} w-32 h-32 pointer-events-none hidden lg:block opacity-60`}>
-            <Image src="/images/pix_designer.png" alt="Pix" fill sizes="128px" className="object-contain" />
-         </div>
-      )}
-    </div>
+        {data.description}
+      </motion.p>
+      
+      {/* Technology Tags */}
+      <motion.div 
+        initial={{ opacity: 0, y: 10 }} 
+        whileInView={{ opacity: 1, y: 0 }} 
+        viewport={{ margin: "0px -100px" }}
+        transition={{ delay: 0.6, duration: 0.4 }}
+        className="flex flex-wrap gap-2"
+      >
+        {data.achievements?.slice(0, 3).map((ach: string, i: number) => {
+          const tagLabel = ach.split(':')[0]; 
+          if (!tagLabel || tagLabel.length > 25) return null; 
+          return (
+            <span key={i} className="text-[10px] sm:text-xs font-bold bg-black/5 dark:bg-white/10 px-3 py-1.5 rounded-full text-foreground/80 transition-colors uppercase tracking-wider">
+              {tagLabel}
+            </span>
+          );
+        })}
+      </motion.div>
+    </motion.div>
   );
 }
