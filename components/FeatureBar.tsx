@@ -9,7 +9,7 @@ export default function FeatureBar() {
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        className="max-w-[1800px] mx-auto bg-card border border-border rounded-[32px] p-8 shadow-sm overflow-hidden"
+        className="max-w-[1600px] mx-auto bg-card border border-border rounded-[32px] p-8 shadow-sm overflow-hidden"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8">
           {[

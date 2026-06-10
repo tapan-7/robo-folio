@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 export default function PreviewCards() {
   return (
     <section className="px-6 md:px-10 lg:px-24 py-20 bg-background relative z-10 w-full overflow-hidden">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 max-w-[1800px] mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 max-w-[1600px] mx-auto">
         {[
           {
             id: "01",
