@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { FaArrowRight } from "react-icons/fa6";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function Navbar() {
@@ -51,9 +51,9 @@ export default function Navbar() {
       {/* CTA & Theme Toggle */}
       <div className="flex items-center gap-4">
         <ThemeToggle />
-        <button className="hidden md:flex items-center gap-2 bg-card border border-border shadow-sm px-5 py-2.5 rounded-full text-sm font-medium hover:bg-background hover:shadow-md transition-all">
-          Let's Talk <ArrowRight className="w-4 h-4" />
-        </button>
+          <button className="hidden md:flex items-center gap-2 bg-foreground text-background px-6 py-2.5 rounded-full font-medium hover:opacity-90 transition-opacity">
+            Let's Talk <FaArrowRight className="w-4 h-4" />
+          </button>
       </div>
     </nav>
   );

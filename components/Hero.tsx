@@ -3,13 +3,13 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  ArrowRight,
-  Download,
-  Mail,
-  MessageCircle,
-  MessageCircleCode,
-  UserSearch,
-} from "lucide-react";
+  FaArrowRight,
+  FaDownload,
+  FaEnvelope,
+  FaMessage,
+  FaCode,
+  FaUserTie,
+} from "react-icons/fa6";
 
 export default function Hero() {
   return (
@@ -67,25 +67,25 @@ export default function Hero() {
 
             <div className="flex flex-wrap gap-4 mb-12">
               <button className="flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-[20px] font-semibold hover:opacity-90 hover:shadow-lg transition-all">
-                View My Work <ArrowRight className="w-5 h-5" />
+                View My Work <FaArrowRight className="w-5 h-5" />
               </button>
               <button className="flex items-center gap-2 bg-card border border-border text-foreground px-8 py-4 rounded-[20px] font-semibold hover:bg-background hover:shadow-sm transition-all">
-                Download Resume <Download className="w-5 h-5" />
+                Download Resume <FaDownload className="w-5 h-5" />
               </button>
             </div>
 
             <div className="flex items-center gap-6 text-muted-foreground">
               <a href="#" className="hover:text-foreground transition-colors">
-                <MessageCircle className="w-6 h-6" />
+                <FaMessage className="w-6 h-6" />
               </a>
               <a href="#" className="hover:text-foreground transition-colors">
-                <UserSearch className="w-6 h-6" />
+                <FaUserTie className="w-6 h-6" />
               </a>
               <a href="#" className="hover:text-foreground transition-colors">
-                <MessageCircleCode className="w-6 h-6" />
+                <FaCode className="w-6 h-6" />
               </a>
               <a href="#" className="hover:text-foreground transition-colors">
-                <Mail className="w-6 h-6" />
+                <FaEnvelope className="w-6 h-6" />
               </a>
             </div>
           </motion.div>
@@ -106,6 +106,7 @@ export default function Hero() {
                 sizes="(max-width: 768px) 100vw, 60vw"
                 className="object-contain drop-shadow-2xl"
                 priority
+                loading="eager"
               />
             </motion.div>
 
