@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-inter);
+}
+
+:root {
+  /* LIGHT THEME (from Master Prompt) */
+  --background: #F5F5F3;
+  --foreground: #111111;
+  --card: #FAFAF8;
+  --card-foreground: #111111;
+  --popover: #FAFAF8;
+  --popover-foreground: #111111;
+  --primary: #0B0B0C;
+  --primary-foreground: #ffffff;
+  --secondary: #e5e5e5;
+  --secondary-foreground: #111111;
+  --muted: #e5e5e5;
+  --muted-foreground: #525252;
+  --accent: #60a5fa;
+  --accent-foreground: #111111;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 0, 0, 0.06);
+  --input: rgba(0, 0, 0, 0.06);
+  --ring: rgba(11, 11, 12, 0.2);
+}
+
+[data-theme='dark'] {
+  /* DARK THEME */
+  --background: #090909;
+  --foreground: #F5F5F5;
+  --card: rgba(25, 25, 25, 0.6);
+  --card-foreground: #F5F5F5;
+  --popover: #151515;
+  --popover-foreground: #F5F5F5;
+  --primary: #ffffff;
+  --primary-foreground: #090909;
+  --secondary: #27272a;
+  --secondary-foreground: #F5F5F5;
+  --muted: #27272a;
+  --muted-foreground: rgba(255, 255, 255, 0.7);
+  --accent: #60a5fa;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: rgba(255, 255, 255, 0.2);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: inherit;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.hand-drawn-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.hand-drawn-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M0,5 Q50,0 100,5' stroke='currentColor' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  opacity: 0.5;
+}
+
+.font-handwriting {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
