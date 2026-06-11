@@ -124,7 +124,8 @@ export default function Experience() {
                 {/* Thick road surface */}
                 <path 
                   d={d}
-                  className="stroke-[#222222] dark:stroke-white/10 transition-colors duration-300"
+                  stroke="currentColor"
+                  className="text-foreground dark:text-foreground/10 transition-colors duration-300"
                   strokeWidth="100" 
                   fill="none" 
                   strokeLinecap="round" 
@@ -133,7 +134,8 @@ export default function Experience() {
                 {/* White dashed centerline */}
                 <path 
                   d={d}
-                  className="stroke-white dark:stroke-white/50 transition-colors duration-300"
+                  stroke="currentColor"
+                  className="text-background dark:text-background transition-colors duration-300"
                   strokeWidth="6" 
                   strokeDasharray="30 40" 
                   fill="none" 
