@@ -31,7 +31,7 @@ export default function Resume() {
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             className="absolute -left-12 -top-12 w-32 h-32 z-20 hidden md:block"
           >
-            <Image src="/images/doc_builder.png" alt="Doc Builder" fill sizes="128px" className="object-contain drop-shadow-xl" />
+            <Image src="/images/doc_archivist.png" alt="Doc Builder" fill sizes="128px" className="object-contain drop-shadow-xl" />
           </motion.div>
 
           <div className="bg-card border border-border rounded-[32px] p-8 shadow-xl relative overflow-hidden group">

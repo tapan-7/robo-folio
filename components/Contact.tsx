@@ -8,9 +8,9 @@ import { portfolioData } from "@/data/portfolio";
 export default function Contact() {
   const robots = [
     "/images/curio_explorer.png",
-    "/images/bolt_engineer.png",
-    "/images/pix_artist.png",
-    "/images/doc_builder.png",
+    "/images/skill.png",
+    "/images/pix_designer.png",
+    "/images/doc_archivist.png",
     "/images/byte_researcher.png",
   ];
 

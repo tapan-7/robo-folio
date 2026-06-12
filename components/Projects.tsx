@@ -30,7 +30,7 @@ export default function Projects() {
                     viewport={{ once: true }}
                     className={`absolute -top-24 w-24 h-24 z-20 hidden lg:block ${isEven ? 'right-[10%]' : 'left-[10%]'}`}
                   >
-                    <Image src="/images/pix_artist.png" alt="Pix Presenting" fill sizes="96px" className="object-contain drop-shadow-xl" />
+                    <Image src="/images/pix_designer.png" alt="Pix Presenting" fill sizes="96px" className="object-contain drop-shadow-xl" />
                   </motion.div>
                 )}
 
