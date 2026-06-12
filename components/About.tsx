@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
 import {
   FaLocationDot,
@@ -11,6 +11,32 @@ import {
 import { portfolioData } from "@/data/portfolio";
 
 export default function About() {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 100, damping: 20 });
+  const mouseYSpring = useSpring(y, { stiffness: 100, damping: 20 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+
+  const handleMouseMove = (e: any) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
   return (
     <section
       id="about"
@@ -24,8 +50,14 @@ export default function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
           className="w-full lg:w-[40%] flex flex-col relative"
+          style={{ perspective: 1000 }}
         >
-          <div className="relative w-full aspect-[4/5] rounded-[32px] overflow-hidden bg-muted mb-8 border border-border shadow-sm grayscale hover:grayscale-0 transition-all duration-700 cursor-pointer group">
+          <motion.div
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+            className="relative w-full aspect-[4/5] rounded-[32px] overflow-hidden bg-muted mb-8 border border-border shadow-sm grayscale hover:grayscale-0 transition-all duration-700 cursor-pointer group"
+          >
             <Image
               src="https://placehold.co/800x1000/111111/525252.png?text=Your+Portrait"
               alt="Tapan Kumar Swain"
@@ -33,7 +65,20 @@ export default function About() {
               sizes="(max-width: 1024px) 100vw, 40vw"
               className="object-cover group-hover:scale-105 transition-transform duration-700"
             />
-          </div>
+            
+            {/* Orbiting Dots SVG */}
+            <motion.svg 
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0 w-full h-full text-primary/30 z-10 pointer-events-none scale-150 mix-blend-overlay"
+              viewBox="0 0 100 100"
+            >
+              <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 8" />
+              <circle cx="50" cy="2" r="2" fill="currentColor" />
+              <circle cx="2" cy="50" r="1.5" fill="currentColor" />
+              <circle cx="98" cy="50" r="1.5" fill="currentColor" />
+            </motion.svg>
+          </motion.div>
 
           <div className="flex flex-row flex-wrap gap-4 text-sm font-medium text-foreground">
             <div className="flex items-center gap-3">

@@ -11,10 +11,14 @@ import Resume from "@/components/Resume";
 import Blog from "@/components/Blog";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import MouseGlow from "@/components/MouseGlow";
+import BackgroundEffects from "@/components/BackgroundEffects";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
+    <main className="min-h-screen relative text-foreground selection:bg-primary selection:text-primary-foreground">
+      <BackgroundEffects />
+      <MouseGlow />
       <Navbar />
       <Hero />
       <PreviewCards />

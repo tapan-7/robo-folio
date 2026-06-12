@@ -1,8 +1,9 @@
 "use client";
 
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { portfolioData } from "@/data/portfolio";
+import { useTheme } from "next-themes";
 
 // --- Typewriter Effect Component ---
 const typewriterVariants: Variants = {
@@ -49,6 +50,14 @@ function TypewriterText({
 
 export default function Experience() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted && theme !== "light";
 
   const journey = [...portfolioData.experience].reverse(); // Oldest first
 
@@ -150,9 +159,31 @@ export default function Experience() {
                   fill="none"
                   strokeLinecap="round"
                   style={{
-                    filter: "drop-shadow(0px 20px 30px rgba(0,0,0,0.15))",
+                    filter: isDark
+                      ? "drop-shadow(0px 0px 30px rgba(255, 90, 0, 0.4))"
+                      : "drop-shadow(0px 20px 30px rgba(0,0,0,0.15))",
                   }}
                 />
+                {/* Energy Pulse (Moving glowing line) */}
+
+                <motion.path
+                  d={d}
+                  stroke={
+                    isDark ? "rgba(255, 90, 0, 0.8)" : "rgba(0, 0, 0, 0.8)"
+                  }
+                  strokeWidth="8"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeDasharray="200 1500"
+                  animate={{ strokeDashoffset: [1700, 0] }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                  style={{
+                    filter: isDark
+                      ? "drop-shadow(0px 0px 10px rgba(255, 90, 0, 1))"
+                      : "drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.15))",
+                  }}
+                />
+
                 {/* White dashed centerline */}
                 <path
                   d={d}
@@ -216,8 +247,19 @@ export default function Experience() {
                       initial={{ scale: 0 }}
                       whileInView={{ scale: 1 }}
                       transition={{ duration: 0.4, delay: 0.1 }}
-                      className="w-6 h-6 rounded-full bg-[#222222] dark:bg-white border-4 border-white dark:border-zinc-900 shadow-lg"
-                    />
+                      className="w-6 h-6 rounded-full bg-[#222222] dark:bg-white border-4 border-white dark:border-zinc-900 shadow-lg relative flex items-center justify-center"
+                    >
+                      {/* Breathing Node Energy */}
+                      <motion.div
+                        animate={{ scale: [1, 2.5, 1], opacity: [0.5, 0, 0.5] }}
+                        transition={{
+                          duration: 2.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                        className={`absolute inset-0 rounded-full blur-[2px] ${isDark ? "bg-orange-500" : "bg-black"}`}
+                      />
+                    </motion.div>
                   </div>
                 </div>
               );
