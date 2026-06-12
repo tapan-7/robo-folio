@@ -25,14 +25,7 @@ export default function Resume() {
           transition={{ duration: 0.8 }}
           className="w-full lg:w-1/2 relative"
         >
-          {/* Doc Robot standing near the resume */}
-          <motion.div 
-            animate={{ y: [-5, 5, -5] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -left-12 -top-12 w-32 h-32 z-20 hidden md:block"
-          >
-            <Image src="/images/doc_archivist.png" alt="Doc Builder" fill sizes="128px" className="object-contain drop-shadow-xl" />
-          </motion.div>
+
 
           <div className="bg-card border border-border rounded-[32px] p-8 shadow-xl relative overflow-hidden group">
             {/* Gloss */}

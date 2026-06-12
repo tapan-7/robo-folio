@@ -22,17 +22,6 @@ export default function Projects() {
             const isEven = idx % 2 === 0;
             return (
               <div key={project.title} className="relative">
-                {/* Pix Robot Presenting (Only between projects) */}
-                {idx > 0 && (
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    className={`absolute -top-24 w-24 h-24 z-20 hidden lg:block ${isEven ? 'right-[10%]' : 'left-[10%]'}`}
-                  >
-                    <Image src="/images/pix_designer.png" alt="Pix Presenting" fill sizes="96px" className="object-contain drop-shadow-xl" />
-                  </motion.div>
-                )}
 
                 <div className={`flex flex-col lg:flex-row gap-12 lg:gap-24 items-center ${isEven ? '' : 'lg:flex-row-reverse'}`}>
                   
@@ -48,6 +37,7 @@ export default function Projects() {
                       src={project.image} 
                       alt={project.title} 
                       fill 
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-700" 
                     />
                     <div className="absolute inset-0 bg-foreground/5 group-hover:bg-transparent transition-colors duration-500" />

@@ -16,14 +16,7 @@ export default function Skills() {
         <span className="text-sm font-bold tracking-widest text-muted-foreground uppercase mb-4">Expertise</span>
         <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-center">Professional Dashboard</h2>
         
-        {/* Robot Bolt floating near the title */}
-        <motion.div 
-          animate={{ y: [-5, 5, -5], rotate: [-2, 2, -2] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -right-4 md:right-[20%] -top-10 w-20 h-20 opacity-80"
-        >
-          <Image src="/images/hero.png" alt="Bolt Robot" fill sizes="80px" className="object-contain" />
-        </motion.div>
+
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">

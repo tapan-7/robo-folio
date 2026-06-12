@@ -68,14 +68,7 @@ export default function About() {
           transition={{ duration: 0.8 }}
           className="w-full lg:w-[60%] flex flex-col relative"
         >
-          {/* Subtle Curio Robot Floating */}
-          <motion.div 
-            animate={{ y: [-10, 10, -10], rotate: [-2, 2, -2] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -right-4 -top-12 w-24 h-24 hidden md:block opacity-80"
-          >
-            <Image src="/images/curio_explorer.png" alt="Curio Looking" fill sizes="96px" className="object-contain" />
-          </motion.div>
+
 
           <span className="text-sm font-bold tracking-widest text-muted-foreground uppercase mb-4">About Me</span>
           <h2 className="text-4xl md:text-5xl font-extrabold mb-8 tracking-tight">Who I Am</h2>

@@ -97,6 +97,7 @@ export default function Contact() {
               src={src}
               alt="Crew Robot"
               fill
+              sizes="(max-width: 768px) 15vw, 15vw"
               className="object-contain object-bottom"
             />
           </motion.div>

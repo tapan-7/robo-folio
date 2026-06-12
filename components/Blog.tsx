@@ -24,20 +24,7 @@ export default function Blog() {
             </h2>
           </div>
 
-          {/* Byte Robot Reading */}
-          <motion.div
-            animate={{ y: [-5, 5, -5] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="hidden md:block w-20 h-20 relative"
-          >
-            <Image
-              src="/images/byte_researcher.png"
-              alt="Byte Reading"
-              fill
-              sizes="80px"
-              className="object-contain"
-            />
-          </motion.div>
+
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -58,6 +45,7 @@ export default function Blog() {
                   src={post.image}
                   alt={post.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4 bg-[var(--background)]/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-[var(--foreground)]">
