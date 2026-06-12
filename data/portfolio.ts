@@ -15,7 +15,7 @@ export const portfolioData = {
     {
       title: "Software Development Engineer - I",
       company: "HyScaler Nettantra Technologies Pvt. Ltd.",
-      period: "Jan 2026 – Present",
+      period: "Jan 2025 – Present",
       location: "Bhubaneswar",
       description:
         "Contributed to the development of an enterprise legal-tech platform used for drafting, reviewing, and managing financial services contracts through AI-assisted workflows.",
@@ -81,13 +81,19 @@ export const portfolioData = {
     },
   ],
   skills: {
-    "Frontend": ["React.js", "Next.js", "React Native", "TypeScript", "JavaScript"],
-    "Backend": ["NestJS", "Node.js", "REST APIs", "WebSockets"],
-    "Database": ["PostgreSQL", "Prisma ORM"],
+    Frontend: [
+      "React.js",
+      "Next.js",
+      "React Native",
+      "TypeScript",
+      "JavaScript",
+    ],
+    Backend: ["NestJS", "Node.js", "REST APIs", "WebSockets"],
+    Database: ["PostgreSQL", "Prisma ORM"],
     "Cloud & DevOps": ["Docker", "AWS S3", "Vercel", "GitHub"],
-    "Messaging": ["Redis", "BullMQ"],
-    "Integrations": ["Salesforce API", "Google Drive API"],
-    "Tools": ["Git", "Postman", "VS Code"],
+    Messaging: ["Redis", "BullMQ"],
+    Integrations: ["Salesforce API", "Google Drive API"],
+    Tools: ["Git", "Postman", "VS Code"],
   },
   projects: [
     {
@@ -106,7 +112,8 @@ export const portfolioData = {
       tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Socket.io"],
       github: "#",
       live: "#",
-      image: "https://placehold.co/1200x800/111111/525252.png?text=Task+Management",
+      image:
+        "https://placehold.co/1200x800/111111/525252.png?text=Task+Management",
     },
     {
       title: "Analytics Dashboard",
@@ -125,6 +132,32 @@ export const portfolioData = {
       github: "#",
       live: "#",
       image: "https://placehold.co/1200x800/111111/525252.png?text=API+Gateway",
+    },
+  ],
+  blogs: [
+    {
+      title: "Google Drive Integration: From OAuth Setup to Background Sync",
+      readTime: "4 min read",
+      category: "Integration",
+      image:
+        "https://media2.dev.to/dynamic/image/width=1200,height=627,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fkwxy1dnx5wiy8521hs9u.png",
+      url: "https://dev.to/tapan-7/google-drive-integration-from-oauth-setup-to-background-sync-251d",
+    },
+    {
+      title: "How to Store VideoSDK Cloud Recordings Securely on AWS S3",
+      readTime: "2 min read",
+      category: "Cloud Storage",
+      image:
+        "https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F5pucpeol052cclynfeik.png",
+      url: "https://dev.to/tapan-7/how-to-store-videosdk-cloud-recordings-securely-on-aws-s3-g5",
+    },
+    {
+      title: "Integrating Health Connect in Android + React Native Apps",
+      readTime: "3 min read",
+      category: "Mobile",
+      image:
+        "https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fg3biexv7pt8weik2xug4.png",
+      url: "https://dev.to/tapan-7/integrating-health-connect-in-android-react-native-apps-2cj4",
     },
   ],
 };
